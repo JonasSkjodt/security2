@@ -2,7 +2,7 @@
 
 For the go.sum files
 ```
-go get github.com/JonasSkjodt/security_2@latest
+go get github.com/JonasSkjodt/security2@latest
 ```
 
 Create RSA key
