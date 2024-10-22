@@ -82,9 +82,9 @@ func main() {
 		log.Fatal("Marshalling patient failed on port", port, "with error:", err)
 	}
 
-	response, err := client.Post(url, "string", bytes.NewReader(b))
+	response, err := client.Post(url, "application/json", bytes.NewReader(b))
 	if err != nil {
-		log.Fatal("Regisering with hospital failed on port", port, "with error:", err)
+		log.Fatal("Regisering with hospital failed on port ", port, " with error: ", err)
 	}
 	log.Println("Patient", port, "registered with hospital. Received response code", response.Status)
 
@@ -222,8 +222,7 @@ func GenerateShares(p int, data int, amount int) []int {
 		totalShares += share // add the share to the totalShares
 	}
 
-	// log.Println(port, ": Total shares:", totalShares)
-	// Calculate the last share so that the sum of all shares is equal to the data
+	// Calculate last share 
 	shares[amount-1] = data - totalShares
 
 	return shares

@@ -72,7 +72,6 @@ func hospitalServer() {
 }
 
 func Patients(w http.ResponseWriter, req *http.Request) {
-	log.Println("Hospital", port, "received from /patients")
 	if req.Method == "POST" {
 		log.Println("Hospital", port, "received POST from /patients")
 
@@ -91,7 +90,30 @@ func Patients(w http.ResponseWriter, req *http.Request) {
 		patients = append(patients, receivedPort.Port)
 		regPat++
 		if regPat == totPat {
-			sendPorts()
+			log.Println("Hospital", port, "Sending ports to patients")
+			for i, p := range patients {
+				// Create a new slice with all the patients except the current one
+				// and then send it to the current patient
+				remainingPatients := append([]int{}, patients[:i]...)
+				remainingPatients = append(remainingPatients, patients[i+1:]...)
+
+				log.Println("Hospital", port, "sending ports", remainingPatients, "to", p)
+				url := fmt.Sprintf("https://localhost:%d/patients", p)
+				patientPorts := Patient{
+					PortsList: remainingPatients,
+				}
+
+				b, err := json.Marshal(patientPorts)
+				if err != nil {
+					log.Fatal("Hospital", port, "marshalling patientPorts failed with error", err)
+				}
+
+				response, err := client.Post(url, "application/json", bytes.NewReader(b))
+				if err != nil {
+					log.Fatal("Hospital", port, "posting patientPorts failed to", p, "with error:", err)
+				}
+				log.Println("Hospital", port, "sent ports to ", p, "with response code", response.Status)
+			}
 		}
 		w.WriteHeader(http.StatusOK)
 	}
@@ -121,34 +143,6 @@ func Shares(w http.ResponseWriter, req *http.Request) {
 			log.Println("Finished computing: Final value is", data)
 		}
 		w.WriteHeader(http.StatusOK)
-	}
-}
-
-// when the hospital has received all the patients 
-func sendPorts() {
-	log.Println("Hospital", port, "Sending ports to patients")
-	for i, p := range patients {
-		// Create a new slice with all the patients except the current one
-		// and then send it to the current patient
-		remainingPatients := append([]int{}, patients[:i]...)
-		remainingPatients = append(remainingPatients, patients[i+1:]...)
-
-		log.Println("Hospital", port, "sending ports", remainingPatients, "to", p)
-		url := fmt.Sprintf("https://localhost:%d/patients", p)
-		patientPorts := Patient{
-			PortsList: remainingPatients,
-		}
-
-		b, err := json.Marshal(patientPorts)
-		if err != nil {
-			log.Fatal("Hospital", port, "marshalling patientPorts failed with error", err)
-		}
-
-		response, err := client.Post(url, "application/json", bytes.NewReader(b))
-		if err != nil {
-			log.Fatal("Hospital", port, "posting patientPorts failed to", p, "with error:", err)
-		}
-		log.Println("Hospital", port, "sent ports to ", p, "with response code", response.Status)
 	}
 }
 
