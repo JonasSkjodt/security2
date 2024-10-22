@@ -1,3 +1,3 @@
-module github.com/JonasSkjodt/security_2/patient
+module github.com/JonasSkjodt/security2/patient
 
 go 1.19
