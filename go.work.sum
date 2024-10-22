@@ -1,4 +1,4 @@
-github.com/JonasSkjodt/security_2 v0.0.0 h1:irMjvg0hjxNPIKD46s1xVYa0+WGZL0FFfjLyC17s0OU=
-github.com/JonasSkjodt/security_2 v0.0.0/go.mod h1:vKa5LrBdUGq8QWdy9PQghVE3akqifW0QMcfBi7lqM2s=
-github.com/JonasSkjodt/security_2/patient v0.0.0 h1:irMjvg0hjxNPIKD46s1xVYa0+WGZL0FFfjLyC17s0OU=
-github.com/JonasSkjodt/security_2/patient v0.0.0/go.mod h1:vKa5LrBdUGq8QWdy9PQghVE3akqifW0QMcfBi7lqM2s=
+github.com/JonasSkjodt/security2 v0.0.1 h1:71/2hSy2N1xjJmf+6pr8GkYuq6yHOZ5n+qpQGxRhGH4=
+github.com/JonasSkjodt/security2 v0.0.1/go.mod h1:oEQad+vFtPTaAnBRHEReLZh6wE6drrdVZTnmrpWAfCo=
+github.com/JonasSkjodt/security2/patient v0.0.1 h1:71/2hSy2N1xjJmf+6pr8GkYuq6yHOZ5n+qpQGxRhGH4=
+github.com/JonasSkjodt/security2/patient v0.0.1/go.mod h1:oEQad+vFtPTaAnBRHEReLZh6wE6drrdVZTnmrpWAfCo=
