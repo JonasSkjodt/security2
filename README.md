@@ -12,6 +12,6 @@ openssl req -new -x509 -sha256 -key server.key -out server.crt -days 365 -addext
 
 after the server.crt and server.key has been created, open a bash terminal
 
-**run the program**
+**run the program in bash from the root directory**
 
 bash main.sh
